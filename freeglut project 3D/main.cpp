@@ -1,3 +1,12 @@
+/********************************************************************************
+*																				*
+*		Practica 1 IG - Planeta y satelite										*
+*		Autores:	David Garcia Alvarez										*
+*					Juan Luis Perez Valbuena									*
+*																				*
+*********************************************************************************/
+
+
 #include <Windows.h>
 #include <gl/GL.h>
 #include <gl/GLU.h>
