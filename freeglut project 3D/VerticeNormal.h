@@ -12,7 +12,12 @@
 class VerticeNormal
 {
 public:
-	VerticeNormal(void);
+
+	int indiceV, indiceN;
+
+	VerticeNormal(int iv, int in):indiceN(in), indiceV(iv){}
+	VerticeNormal(void){}	
 	~VerticeNormal(void);
+
 };
 

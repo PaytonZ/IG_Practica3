@@ -30,6 +30,10 @@ GLdouble vector;
 				vector=0;
 			else vector=1;
 	}
+	PV3D()
+	{
+		x=0;y=0;z=0;vector=0;
+	}
 	~PV3D(void);
 
 //Sobrecarga de operadores

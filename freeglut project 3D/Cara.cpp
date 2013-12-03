@@ -11,11 +11,16 @@
 #include "Cara.h"
 
 
-Cara::Cara(void)
-{
-}
+
 
 
 Cara::~Cara(void)
 {
+}
+
+void Cara:: setnumVertices(int nv)
+{
+	if (arrayVN)
+		delete(arrayVN);
+	arrayVN= new VerticeNormal[numVetices];
 }
