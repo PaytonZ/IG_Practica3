@@ -30,6 +30,12 @@
     <ClCompile Include="Malla.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="escena.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Controlador.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PV3D.h">
@@ -42,6 +48,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Malla.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="escena.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Controlador.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

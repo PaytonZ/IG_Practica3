@@ -15,7 +15,9 @@
 //#include <GL/glut.h>
 
 #include <iostream>
-using namespace std;
+#include "escena.h"
+#include "Controlador.h"
+
 
 // Freeglut parameters
 // Flag telling us to keep processing events
@@ -60,84 +62,26 @@ void initGL() {
 
 	// Frustum set up
     glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();     
-	glOrtho(xLeft, xRight, yBot, yTop, N, F);
-
+    glLoadIdentity(); 
+	
+	// glOrtho(xLeft, xRight, yBot, yTop, N, F);
+	escena *escena_principal= escena::getAVEInstance();
+   
+	
+	glOrtho(escena_principal->getxLeft(), escena_principal->getxRight(), escena_principal->getyBot(), escena_principal->getyTop(),N,F);
 	// Viewport set up
+
     glViewport(0, 0, WIDTH, HEIGHT);        
  }
 
-void display(void) {
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);  
-
-	// Drawing axes
-	glBegin( GL_LINES );
-		glColor3f(1.0,0.0,0.0); 
-		glVertex3f(0, 0, 0);
-		glVertex3f(20, 0, 0);	     
-	 
-		glColor3f(0.0,1.0,0.0); 
-		glVertex3f(0, 0, 0);
-		glVertex3f(0, 20, 0);	 
-	 
-		glColor3f(0.0,0.0,1.0); 
-		glVertex3f(0, 0, 0);
-		glVertex3f(0, 0, 20);	     
-	glEnd();
-
-	glFlush();
-	glutSwapBuffers();
-}
-
-
-void resize(int newWidth, int newHeight) {
-	WIDTH= newWidth;
-	HEIGHT= newHeight;
-	GLdouble RatioViewPort= (float)WIDTH/(float)HEIGHT;
-	glViewport (0, 0, WIDTH, HEIGHT) ;
-   
-	GLdouble SVAWidth= xRight-xLeft;
-	GLdouble SVAHeight= yTop-yBot;
-	GLdouble SVARatio= SVAWidth/SVAHeight;
-	if (SVARatio >= RatioViewPort) {		 
-		GLdouble newHeight= SVAWidth/RatioViewPort;
-		GLdouble yMiddle= ( yBot+yTop )/2.0;
-		yTop= yMiddle + newHeight/2.0;
-		yBot= yMiddle - newHeight/2.0;
-    }
-	else {      
-		GLdouble newWidth= SVAHeight*RatioViewPort;
-		GLdouble xMiddle= ( xLeft+xRight )/2.0;
-		xRight= xMiddle + newWidth/2.0;
-		xLeft=  xMiddle - newWidth/2.0;
-	}
-
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();   
-	glOrtho(xLeft, xRight, yBot, yTop, N, F);
-}
-
-void key(unsigned char key, int x, int y){
-	bool need_redisplay = true;
-	switch (key) {
-		case 27:  /* Escape key */
-			//continue_in_main_loop = false; // (**)
-			//Freeglut's sentence for stopping glut's main loop (*)
-			glutLeaveMainLoop (); 
-			break;		 			 
-		default:
-			need_redisplay = false;
-			break;
-	}
-
-	if (need_redisplay)
-		glutPostRedisplay();
-}
 
 int main(int argc, char *argv[]){
-	cout<< "Starting console..." << endl;
+	std::cout<< "Starting console..." << std::endl;
 
 	int my_window; // my window's identifier
+
+	//Inicializacion de mi AVE implementada con singleton
+    escena::getAVEInstance(xLeft,yBot,xRight,yTop);
 
 	// Initialization
 	glutInitWindowSize(WIDTH, HEIGHT);
@@ -146,14 +90,15 @@ int main(int argc, char *argv[]){
 	glutInit(&argc, argv);
 
 	// Window construction
-	my_window = glutCreateWindow("Freeglut 3D-project");
+	my_window = glutCreateWindow("Practica 3 IG ");
     
 	// Callback registration
-	glutReshapeFunc(resize);
-	glutKeyboardFunc(key);
-	glutDisplayFunc(display);
+	glutReshapeFunc(escena::resize);
+	glutKeyboardFunc(Controlador::key);
+	glutDisplayFunc(escena::display);
 
 	// OpenGL basic setting
+	
 	initGL();
 
 	// Freeglut's main loop can be stopped executing (**)
