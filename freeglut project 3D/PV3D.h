@@ -34,7 +34,7 @@ GLdouble vector;
 	{
 		x=0;y=0;z=0;vector=0;
 	}
-	~PV3D(void);
+	~PV3D(void){}
 
 //Sobrecarga de operadores
 	PV3D& operator = (const PV3D &p);
@@ -50,6 +50,7 @@ GLdouble vector;
 	GLdouble productoEscalar(const PV3D &p);
 	PV3D normalizarVector();	
 	GLdouble moduloVector ();
+	
 };
 
 #endif // !PUNTO_H

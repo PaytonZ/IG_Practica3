@@ -18,18 +18,21 @@ class Malla
 {
 protected: //El tio quiere que sean **, nose por que
 	int numVertices;
-	PV3D* vertice;
+	PV3D** vertice;
 	int numNormales;
-	PV3D* normal;
+	PV3D** normal;
 	int numCaras;
-	Cara* cara;
+	Cara** cara;
 public:
 	Malla(int numV, int numN, int numC): numVertices(numV), numNormales(numN), numCaras(numC)
 	{
-		vertice= new PV3D[numVertices];
-		normal= new PV3D[numNormales];
-		cara = new Cara[numCaras];
+		vertice = new PV3D*[numVertices];
+		normal = new PV3D*[numNormales];
+		cara= new Cara*[numCaras];
 	}
 	~Malla(void);
+
+	void dibuja();
+	PV3D calculoVectorNormalPorNewell(Cara c);
 };
 
