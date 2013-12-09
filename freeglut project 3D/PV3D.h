@@ -37,7 +37,7 @@ GLdouble vector;
 	~PV3D(void){}
 
 //Sobrecarga de operadores
-	PV3D& operator = (const PV3D &p);
+	//PV3D& operator = (const PV3D &p);
 	PV3D& operator * (const GLdouble &p);
 	PV3D& operator * (const PV3D &p);
 	PV3D& operator + (const PV3D &p);

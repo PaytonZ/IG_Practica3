@@ -15,8 +15,9 @@
 #include <Windows.h>
 #include <gl/GL.h>
 #include <gl/GLU.h>
-
+#include <iostream>
 #include <GL/freeglut.h>
+#include "Satelite.h"
 
 
 
@@ -47,6 +48,8 @@ public:
         GLdouble getyBot() const;
         void setyBot(GLdouble);
 
+		Satelite* getSatelite();
+
 	
 
 		
@@ -55,7 +58,7 @@ private:
 	escena() {}
 	escena(GLdouble new_xleft, GLdouble new_yBot , GLdouble new_xright, GLdouble new_yTop):
 		xLeft(new_xleft) , xRight(new_xright) ,  yBot(new_yBot) , yTop(new_yTop) {
-		
+			miSatelite = new Satelite(5,4,8);
 		
 			
 	}
@@ -70,6 +73,7 @@ private:
 	GLdouble yBot;
 	GLdouble yTop;
 
+	Satelite* miSatelite;
 
 };
 

@@ -22,7 +22,15 @@ void Cara:: setnumVertices(int nv)
 {
 	if (arrayVN)
 		delete(arrayVN);
-	*arrayVN = new VerticeNormal[numVetices];
+	arrayVN = new VerticeNormal*[numVetices];
+}
+
+void Cara:: setValor(int i, int v, int n)
+{
+	if (i<numVetices)
+	{
+		arrayVN[i]= new VerticeNormal(v,n);
+	}
 }
 
 int Cara:: getNumeroVertices()

@@ -36,6 +36,12 @@
     <ClCompile Include="Controlador.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Lapiz.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Satelite.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PV3D.h">
@@ -54,6 +60,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Controlador.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Lapiz.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Satelite.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

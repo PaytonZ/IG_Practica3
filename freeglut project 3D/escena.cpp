@@ -7,11 +7,7 @@
 *********************************************************************************/
 
 #include "escena.h"
-#include <iostream>
-#include <Windows.h>
-#include <gl/GL.h>
-#include <gl/GLU.h>
-#include <GL/freeglut.h>
+
 
 
 extern int WIDTH, HEIGHT;
@@ -36,6 +32,8 @@ void escena::display() {
 		glVertex3f(0, 0, 0);
 		glVertex3f(0, 0, 20);	     
 	glEnd();
+
+	escena::getAVEInstance()->getSatelite()->dibuja();
 
 	glFlush();
 	glutSwapBuffers();
@@ -117,6 +115,11 @@ GLdouble escena::getyBot() const{
 void escena::setyBot(GLdouble new_ybot )
 {
         yBot=new_ybot;
+}
+
+Satelite* escena:: getSatelite()
+{
+	return miSatelite;
 }
 
 escena* escena::getAVEInstance()

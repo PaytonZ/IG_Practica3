@@ -11,7 +11,7 @@
 #include <cmath>
 #include "PV3D.h"
 
-PV3D& PV3D::operator = (const PV3D &p)
+/*PV3D& PV3D::operator = (const PV3D &p)
 {
 	if(this!=&p){ 
 		this->x = p.x;
@@ -20,7 +20,7 @@ PV3D& PV3D::operator = (const PV3D &p)
 		this->vector=p.vector;
 	}
 	return *this;
-}
+}*/
 
 // TODO falta por implementar la multiplicacion.
 

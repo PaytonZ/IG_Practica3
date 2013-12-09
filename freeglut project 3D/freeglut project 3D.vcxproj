@@ -70,17 +70,21 @@
     <ClCompile Include="Cara.cpp" />
     <ClCompile Include="Controlador.cpp" />
     <ClCompile Include="escena.cpp" />
+    <ClCompile Include="Lapiz.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Malla.cpp" />
     <ClCompile Include="PV3D.cpp" />
+    <ClCompile Include="Satelite.cpp" />
     <ClCompile Include="VerticeNormal.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cara.h" />
     <ClInclude Include="Controlador.h" />
     <ClInclude Include="escena.h" />
+    <ClInclude Include="Lapiz.h" />
     <ClInclude Include="Malla.h" />
     <ClInclude Include="PV3D.h" />
+    <ClInclude Include="Satelite.h" />
     <ClInclude Include="VerticeNormal.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
