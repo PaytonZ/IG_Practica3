@@ -13,7 +13,6 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{7B0BFFD4-F43D-4F20-B1CE-F95EB35AB0A4}</ProjectGuid>
     <RootNamespace>freeglutproject3D</RootNamespace>
-    <ProjectName>Practica 3 IG</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -68,21 +67,19 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Cara.cpp" />
-    <ClCompile Include="Controlador.cpp" />
-    <ClCompile Include="escena.cpp" />
     <ClCompile Include="Lapiz.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Malla.cpp" />
+    <ClCompile Include="Planeta.cpp" />
     <ClCompile Include="PV3D.cpp" />
     <ClCompile Include="Satelite.cpp" />
     <ClCompile Include="VerticeNormal.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cara.h" />
-    <ClInclude Include="Controlador.h" />
-    <ClInclude Include="escena.h" />
     <ClInclude Include="Lapiz.h" />
     <ClInclude Include="Malla.h" />
+    <ClInclude Include="Planeta.h" />
     <ClInclude Include="PV3D.h" />
     <ClInclude Include="Satelite.h" />
     <ClInclude Include="VerticeNormal.h" />

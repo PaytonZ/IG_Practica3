@@ -17,7 +17,16 @@
 
 class Malla
 {
-protected: //El tio quiere que sean **, nose por que
+protected: 
+	/*int numVertices;
+	PV3D** vertice;
+	int numNormales;
+	PV3D** normal;
+	int numCaras;
+	Cara** cara;
+	int iVertice,iNormal,iCara;*/
+public:
+	//De momento esto esta publico para poder debugear y ver el valorde desde clases externas.
 	int numVertices;
 	PV3D** vertice;
 	int numNormales;
@@ -25,7 +34,9 @@ protected: //El tio quiere que sean **, nose por que
 	int numCaras;
 	Cara** cara;
 	int iVertice,iNormal,iCara;
-public:
+
+
+
 	Malla(int numV, int numN, int numC): numVertices(numV), numNormales(numN), numCaras(numC)
 	{
 		vertice = new PV3D*[numVertices];

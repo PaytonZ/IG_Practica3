@@ -26,6 +26,6 @@ public:
 	int getIndiceVerticeK(int);
 private:
 	int numVetices;
-	VerticeNormal** arrayVN; // El tio quiere un **
+	VerticeNormal** arrayVN; 
 };
 

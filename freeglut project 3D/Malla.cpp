@@ -9,26 +9,35 @@
 
 #include "Malla.h"
 
-
-
-
-
-
 void Malla :: dibuja()
 {
-	for (int i=0;i<numCaras; i++)
+	int i=0;
+	while (i<numCaras)
+	//for (int i=0;i<numCaras; i++)
 	{
 		glLineWidth(1.0);
 		//glBegin(GL_POLYGON); 
-		glBegin(GL_LINE);
-		for (int j=0; j<=cara[i]->getNumeroVertices();j++)
+		glBegin(GL_LINE_LOOP);
+		int j=0;
+		//while (j<=cara[i]->getNumeroVertices())
+		while (j<4)
+		{
+			int iN=cara[i]->getIndiceNormalK(j);
+			int iV=cara[i]->getIndiceVerticeK(j);
+			PV3D* debug= vertice[iV];
+			glNormal3f((float)normal[iN]->x,(float)normal[iN]->y,(float)normal[iN]->z);			
+			glVertex3f((float)vertice[iV]->x,(float)vertice[iV]->y,(float)vertice[iV]->z);
+			j++;
+		}
+		/*for (int j=0; j<=cara[i]->getNumeroVertices();j++)
 		{
 			int iN=cara[i]->getIndiceNormalK(j);
 			int iV=cara[i]->getIndiceVerticeK(j);
 			glNormal3f(normal[iN]->x,normal[iN]->y,normal[iN]->z);
 			glVertex3f(vertice[iV]->x,vertice[iV]->y, vertice[iV]->z); 
-		}
+		}*/
 		glEnd();
+		i++;
 	}
 }
 
@@ -40,6 +49,7 @@ PV3D* Malla :: calculoVectorNormalPorNewell(Cara c)
 	for (int i=0; i<c.getNumeroVertices();i++)
 	{
 		verticeActual=vertice[c.getIndiceVerticeK(i)];
+		int asd=c.getIndiceVerticeK((i+1)%c.getNumeroVertices());
 		verticeSiguiente=vertice[c.getIndiceVerticeK((i+1)%c.getNumeroVertices())];
 		n->x+=(verticeActual->y-verticeSiguiente->y)*(verticeActual->z-verticeSiguiente->z);
 		n->y+=(verticeActual->z-verticeSiguiente->z)*(verticeActual->x-verticeSiguiente->x);

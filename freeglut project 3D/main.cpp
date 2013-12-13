@@ -1,12 +1,3 @@
-/********************************************************************************
-*																				*
-*		Practica 1 IG - Planeta y satelite										*
-*		Autores:	David Garcia Alvarez										*
-*					Juan Luis Perez Valbuena									*
-*																				*
-*********************************************************************************/
-
-
 #include <Windows.h>
 #include <gl/GL.h>
 #include <gl/GLU.h>
@@ -15,9 +6,8 @@
 //#include <GL/glut.h>
 
 #include <iostream>
-#include "escena.h"
-#include "Controlador.h"
-
+#include "Satelite.h"
+using namespace std;
 
 // Freeglut parameters
 // Flag telling us to keep processing events
@@ -33,6 +23,11 @@ GLdouble xRight=10, xLeft=-xRight, yTop=10, yBot=-yTop, N=1, F=1000;
 GLdouble eyeX=100.0, eyeY=100.0, eyeZ=100.0;
 GLdouble lookX=0.0, lookY=0.0, lookZ=0.0;
 GLdouble upX=0, upY=1, upZ=0;
+
+//Satelite
+Satelite* miSatelite;
+
+GLUquadricObj* q;
 
 void initGL() {	 		 
 	glClearColor(0.6f,0.7f,0.8f,1.0);
@@ -54,6 +49,9 @@ void initGL() {
 	glShadeModel(GL_SMOOTH);
 
 	// buildSceneObjects();
+	miSatelite= new Satelite(5,200,20);
+	q=gluNewQuadric();
+	gluQuadricDrawStyle(q, GLU_FILL);
 
 	// Camera set up
 	glMatrixMode(GL_MODELVIEW);
@@ -62,26 +60,112 @@ void initGL() {
 
 	// Frustum set up
     glMatrixMode(GL_PROJECTION);
-    glLoadIdentity(); 
-	
-	// glOrtho(xLeft, xRight, yBot, yTop, N, F);
-	escena *escena_principal= escena::getAVEInstance();
-   
-	
-	glOrtho(escena_principal->getxLeft(), escena_principal->getxRight(), escena_principal->getyBot(), escena_principal->getyTop(),N,F);
-	// Viewport set up
+    glLoadIdentity();     
+	glOrtho(xLeft, xRight, yBot, yTop, N, F);
 
+	// Viewport set up
     glViewport(0, 0, WIDTH, HEIGHT);        
  }
 
+void display(void) {
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);  
+
+	// Drawing axes
+	glBegin( GL_LINES );
+		glColor3f(1.0,0.0,0.0); 
+		glVertex3f(0, 0, 0);
+		glVertex3f(20, 0, 0);	     
+	 
+		glColor3f(0.0,1.0,0.0); 
+		glVertex3f(0, 0, 0);
+		glVertex3f(0, 20, 0);	 
+	 
+		glColor3f(0.0,0.0,1.0); 
+		glVertex3f(0, 0, 0);
+		glVertex3f(0, 0, 20);	     
+	glEnd();
+
+	//miSatelite->dibuja();
+	gluSphere(q,5,20,20);
+	/*glBegin(GL_LINE_LOOP);		
+		//Dibujamos el cuadrado base del satelite.
+		glColor3f(0.0,0.0,0.0); 
+		glVertex3f(miSatelite->sat->vertice[0]->x,miSatelite->sat->vertice[0]->y,miSatelite->sat->vertice[0]->z);
+		glVertex3f(miSatelite->sat->vertice[1]->x,miSatelite->sat->vertice[1]->y,miSatelite->sat->vertice[1]->z);
+		glVertex3f(miSatelite->sat->vertice[1]->x,miSatelite->sat->vertice[1]->y,miSatelite->sat->vertice[1]->z);
+		glVertex3f(miSatelite->sat->vertice[2]->x,miSatelite->sat->vertice[2]->y,miSatelite->sat->vertice[2]->z);
+		glVertex3f(miSatelite->sat->vertice[2]->x,miSatelite->sat->vertice[2]->y,miSatelite->sat->vertice[2]->z);
+		glVertex3f(miSatelite->sat->vertice[3]->x,miSatelite->sat->vertice[3]->y,miSatelite->sat->vertice[3]->z);
+		glVertex3f(miSatelite->sat->vertice[0]->x,miSatelite->sat->vertice[0]->y,miSatelite->sat->vertice[0]->z);
+		glVertex3f(miSatelite->sat->vertice[3]->x,miSatelite->sat->vertice[3]->y,miSatelite->sat->vertice[3]->z);
+
+		//Dibujamos el cuadrado superior
+		glColor3f(1.0,0.0,0.0); 
+		glVertex3f(miSatelite->sat->vertice[4]->x,miSatelite->sat->vertice[4]->y,miSatelite->sat->vertice[4]->z);
+		glVertex3f(miSatelite->sat->vertice[5]->x,miSatelite->sat->vertice[5]->y,miSatelite->sat->vertice[5]->z);
+		glVertex3f(miSatelite->sat->vertice[5]->x,miSatelite->sat->vertice[5]->y,miSatelite->sat->vertice[5]->z);
+		glVertex3f(miSatelite->sat->vertice[6]->x,miSatelite->sat->vertice[6]->y,miSatelite->sat->vertice[6]->z);
+		glVertex3f(miSatelite->sat->vertice[6]->x,miSatelite->sat->vertice[6]->y,miSatelite->sat->vertice[6]->z);
+		glVertex3f(miSatelite->sat->vertice[7]->x,miSatelite->sat->vertice[7]->y,miSatelite->sat->vertice[7]->z);
+		glVertex3f(miSatelite->sat->vertice[4]->x,miSatelite->sat->vertice[4]->y,miSatelite->sat->vertice[4]->z);
+		glVertex3f(miSatelite->sat->vertice[7]->x,miSatelite->sat->vertice[7]->y,miSatelite->sat->vertice[7]->z);
+	
+	glEnd();*/
+
+	glFlush();
+	glutSwapBuffers();
+}
+
+
+void resize(int newWidth, int newHeight) {
+	WIDTH= newWidth;
+	HEIGHT= newHeight;
+	GLdouble RatioViewPort= (float)WIDTH/(float)HEIGHT;
+	glViewport (0, 0, WIDTH, HEIGHT) ;
+   
+	GLdouble SVAWidth= xRight-xLeft;
+	GLdouble SVAHeight= yTop-yBot;
+	GLdouble SVARatio= SVAWidth/SVAHeight;
+	if (SVARatio >= RatioViewPort) {		 
+		GLdouble newHeight= SVAWidth/RatioViewPort;
+		GLdouble yMiddle= ( yBot+yTop )/2.0;
+		yTop= yMiddle + newHeight/2.0;
+		yBot= yMiddle - newHeight/2.0;
+    }
+	else {      
+		GLdouble newWidth= SVAHeight*RatioViewPort;
+		GLdouble xMiddle= ( xLeft+xRight )/2.0;
+		xRight= xMiddle + newWidth/2.0;
+		xLeft=  xMiddle - newWidth/2.0;
+	}
+
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();   
+	glOrtho(xLeft, xRight, yBot, yTop, N, F);
+}
+
+void key(unsigned char key, int x, int y){
+	bool need_redisplay = true;
+	switch (key) {
+		case 27:  /* Escape key */
+			//continue_in_main_loop = false; // (**)
+			//Freeglut's sentence for stopping glut's main loop (*)
+			glutLeaveMainLoop (); 
+			break;		 			 
+		default:
+			need_redisplay = false;
+			break;
+	}
+
+	if (need_redisplay)
+		glutPostRedisplay();
+}
 
 int main(int argc, char *argv[]){
-	std::cout<< "Starting console..." << std::endl;
+	cout<< "Starting console..." << endl;
+
 
 	int my_window; // my window's identifier
-
-	//Inicializacion de mi AVE implementada con singleton
-    escena::getAVEInstance(xLeft,yBot,xRight,yTop);
 
 	// Initialization
 	glutInitWindowSize(WIDTH, HEIGHT);
@@ -90,15 +174,14 @@ int main(int argc, char *argv[]){
 	glutInit(&argc, argv);
 
 	// Window construction
-	my_window = glutCreateWindow("Practica 3 IG ");
+	my_window = glutCreateWindow("Freeglut 3D-project");
     
 	// Callback registration
-	glutReshapeFunc(escena::resize);
-	glutKeyboardFunc(Controlador::key);
-	glutDisplayFunc(escena::display);
+	glutReshapeFunc(resize);
+	glutKeyboardFunc(key);
+	glutDisplayFunc(display);
 
 	// OpenGL basic setting
-	
 	initGL();
 
 	// Freeglut's main loop can be stopped executing (**)

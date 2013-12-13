@@ -35,8 +35,10 @@ void Lapiz :: forward(GLdouble dist,bool draw)
 {
 	PV3D nuevo_punto;
 	GLdouble pasoRadianes= M_PI*dir/180.00;
-	nuevo_punto.x= pos.x + dist*cos(pasoRadianes);
+	GLdouble debug2=dist*cos(pasoRadianes);
+	nuevo_punto.x= pos.x + debug2;
 	nuevo_punto.y=pos.y;
-	nuevo_punto.z=pos.z + dist*sin(pasoRadianes);
+	GLdouble debug=dist*sin(pasoRadianes);
+	nuevo_punto.z=pos.z + debug;
 	pos=nuevo_punto;
 }
