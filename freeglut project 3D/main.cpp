@@ -63,11 +63,11 @@ void initGL() {
 	glShadeModel(GL_SMOOTH);
 
 	// buildSceneObjects();
-	miSatelite= new Satelite(5,10,2);
-	q=gluNewQuadric();
-	gluQuadricDrawStyle(q, GLU_LINE);
+	//miSatelite= new Satelite(5,10,2);
+	//q=gluNewQuadric();
+	//gluQuadricDrawStyle(q, GLU_LINE);
 
-	esp = new CirculoEspiral(10,4,2);
+	esp = new CirculoEspiral(100,4,3);
 
 	// Camera set up
 	glMatrixMode(GL_MODELVIEW);
@@ -101,10 +101,9 @@ void display(void) {
 		glVertex3f(0, 0, 200);	     
 	glEnd();
 
-	/*
-	glMatrixMode(GL_MODELVIEW);
+	
+	/*glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
-	//glRotatef(anguloPlaneta,0.0,-1.0,0.0);
 	glTranslatef(cos(xEspiral)+xEspiral*sin(xEspiral),0,sin(xEspiral)-xEspiral*cos(xEspiral));
 	glRotatef(anguloPlaneta,0.0,-1.0,0.0);
 	glColor3f(0.0,0.0,0.0);
@@ -116,11 +115,43 @@ void display(void) {
 	glColor3f(1.0,1.0,0.0);	
 	miSatelite->dibuja();
 	glPopMatrix();
-	glPopMatrix();
-	*/
+	glPopMatrix();*/
 
 	esp->pintar();
+	
+	/*glBegin(GL_LINES);
+	int i=0;
+			glVertex3d(esp->espiral->vertice[i]->x,esp->espiral->vertice[i]->y,esp->espiral->vertice[i]->z);
+			glVertex3d(esp->espiral->vertice[i+1]->x,esp->espiral->vertice[i+1]->y,esp->espiral->vertice[i+1]->z);
 
+			glVertex3d(esp->espiral->vertice[i+1]->x,esp->espiral->vertice[i+1]->y,esp->espiral->vertice[i+1]->z);
+			glVertex3d(esp->espiral->vertice[i+2]->x,esp->espiral->vertice[i+2]->y,esp->espiral->vertice[i+2]->z);
+
+			glVertex3d(esp->espiral->vertice[i+2]->x,esp->espiral->vertice[i+2]->y,esp->espiral->vertice[i+2]->z);
+			glVertex3d(esp->espiral->vertice[i+3]->x,esp->espiral->vertice[i+3]->y,esp->espiral->vertice[i+3]->z);
+
+			glVertex3d(esp->espiral->vertice[i+3]->x,esp->espiral->vertice[i+3]->y,esp->espiral->vertice[i+3]->z);
+			glVertex3d(esp->espiral->vertice[i]->x,esp->espiral->vertice[i]->y,esp->espiral->vertice[i]->z);
+	
+
+		glVertex3d(esp->espiral->vertice[4]->x,esp->espiral->vertice[4]->y,esp->espiral->vertice[4]->z);
+		glVertex3d(esp->espiral->vertice[5]->x,esp->espiral->vertice[5]->y,esp->espiral->vertice[5]->z);
+		glVertex3d(esp->espiral->vertice[5]->x,esp->espiral->vertice[5]->y,esp->espiral->vertice[5]->z);
+		glVertex3d(esp->espiral->vertice[6]->x,esp->espiral->vertice[6]->y,esp->espiral->vertice[6]->z);
+		glVertex3d(esp->espiral->vertice[6]->x,esp->espiral->vertice[6]->y,esp->espiral->vertice[6]->z);
+		glVertex3d(esp->espiral->vertice[7]->x,esp->espiral->vertice[7]->y,esp->espiral->vertice[7]->z);
+		glVertex3d(esp->espiral->vertice[7]->x,esp->espiral->vertice[7]->y,esp->espiral->vertice[7]->z);
+		glVertex3d(esp->espiral->vertice[4]->x,esp->espiral->vertice[4]->y,esp->espiral->vertice[4]->z);
+
+		glVertex3d(esp->espiral->vertice[8]->x,esp->espiral->vertice[8]->y,esp->espiral->vertice[8]->z);
+		glVertex3d(esp->espiral->vertice[9]->x,esp->espiral->vertice[9]->y,esp->espiral->vertice[9]->z);
+		glVertex3d(esp->espiral->vertice[9]->x,esp->espiral->vertice[9]->y,esp->espiral->vertice[9]->z);
+		glVertex3d(esp->espiral->vertice[10]->x,esp->espiral->vertice[10]->y,esp->espiral->vertice[10]->z);
+		glVertex3d(esp->espiral->vertice[10]->x,esp->espiral->vertice[10]->y,esp->espiral->vertice[10]->z);
+		glVertex3d(esp->espiral->vertice[11]->x,esp->espiral->vertice[11]->y,esp->espiral->vertice[11]->z);
+		glVertex3d(esp->espiral->vertice[11]->x,esp->espiral->vertice[11]->y,esp->espiral->vertice[11]->z);
+		glVertex3d(esp->espiral->vertice[8]->x,esp->espiral->vertice[8]->y,esp->espiral->vertice[8]->z);
+	glEnd();*/
 	
 	
 

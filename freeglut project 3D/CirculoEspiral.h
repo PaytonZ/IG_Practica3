@@ -54,39 +54,31 @@ public:
 		t(t)
 		*/
 
-		auto t = 0.2;
-		for(auto i=0; i < nQ ; i++)
+		double tiempo = 0.2;
+		for(int i=0; i < numQ ; i++)
 		{
-			PV3D c (cos(t) + t* sin(t), 0 , sin(t) - t*cos(t),false);
-			PV3D cprimera(t*cos(t) ,0 , t*sin(t),true );
-			PV3D csegunda(cos(t) - t*sin(t),0,sin(t)* t*cos(t),true);
-			auto b = cprimera * csegunda;
-			b=b.normalizarVector();
-			auto t= cprimera.normalizarVector();
-			auto n = b * t;
-			
 			//Transformar los puntos
-			for(auto j=0; j <numQ; j++)
+			for(int j=0; j <numL; j++)
 			{
-
-				auto punto = espiral->vertice[j];
-
-				
-				espiral->anadirVertice(
-
-					new PV3D(
-					n.x * punto->x +  b.x * punto->y + t.x * punto->z + c.x * punto->vector,
-					n.y * punto->x +  b.y * punto->y + t.y * punto->z + c.y * punto->vector,
-					n.z * punto->x +  b.z * punto->y + t.z * punto->z + c.z * punto->vector,
-					false));
-
-
+				PV3D c (cos(tiempo) + tiempo*sin(tiempo), 0 , sin(tiempo) - tiempo*cos(tiempo),false);
+				PV3D cprimera(tiempo*cos(tiempo) ,0 , tiempo*sin(tiempo),true );
+				PV3D csegunda(cos(tiempo) - tiempo*sin(tiempo),0,sin(tiempo) +tiempo*cos(tiempo),true);
+				PV3D b = cprimera * csegunda;
+				b=b.normalizarVector();
+				PV3D t= cprimera.normalizarVector();
+				PV3D n = b * t;		
+				PV3D* punto = espiral->vertice[j];	
+				double ax=n.x * punto->x +  b.x * punto->y + t.x * punto->z + c.x;
+				double ay=n.y * punto->x +  b.y * punto->y + t.y * punto->z + c.y;
+				double az=n.z * punto->x +  b.z * punto->y + t.z * punto->z + c.z;
+				espiral->anadirVertice(new PV3D(n.x * punto->x +  b.x * punto->y + t.x * punto->z + c.x ,n.y * punto->x +  b.y * punto->y + t.y * punto->z + c.y ,n.z * punto->x +  b.z * punto->y + t.z * punto->z + c.z ,	false));
 			}
-			for(auto j=0; j < numL ; j++)
+			//Inicializo las caras
+			for(int j=0; j < numL ; j++)
 			{
-				auto caraAnadir= new Cara(4); //metemos un 4 por que las caras son rectangulos.
-				auto debug=j;
-				auto debugPuntos=espiral->vertice[debug];
+				Cara* caraAnadir= new Cara(4); //metemos un 4 por que las caras son rectangulos.
+				int debug=j;
+				PV3D* debugPuntos=espiral->vertice[debug];
 				caraAnadir->setValor(0,j,j);
 
 				debug=j+numL;
@@ -103,15 +95,9 @@ public:
 
 				espiral->anadirNormal (espiral->calculoVectorNormalPorNewell(*caraAnadir)); // Esto calcula la normal de la cara y la inserta en su posicion correspondiente en la maya.
 				espiral->anadirCara(caraAnadir); 
-
 			}
-
-
-
+			tiempo=tiempo+0.2;
 		}
-
-
-
 	}
 
 	void pintar();

@@ -63,8 +63,8 @@ PV3D& PV3D::operator * (const PV3D &p)
 {
 	if(this->vector==0)
 	
-		return *(new PV3D ( this->x* p.x ,  this->y*p.y,
-						this->z*p.z, true));
+		return *(new PV3D ( this->y*p.z - this->z*p.y,  this->z*p.x - this->x*p.z,
+						this->x*p.y - this->y*p.x, true));
 	else
 		return *(new PV3D ( this->x* p.x ,  this->y*p.y,
 						this->z*p.z, false));
