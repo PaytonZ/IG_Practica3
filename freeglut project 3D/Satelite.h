@@ -25,7 +25,7 @@ public:
 		int numVertices= 3*numL+numQ*numL;
 		int numNorCaras= 2*numL+numQ*numL; //Hay una normal por cara.
 		sat = new Malla(numVertices,numNorCaras,numNorCaras);
-		//sat = new Malla(numVertices,numL,numL);   // ESTO ES PARA DEBUGERA CUANDO SE TERMIEN DESCOMENTAR LO DE ARRIBA.
+		
 
 		//Calculo de la cara inferior e insertamos los vertices en la malla.
 		PV3D centro = PV3D(0,0,0,false);

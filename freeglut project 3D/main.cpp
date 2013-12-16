@@ -17,7 +17,7 @@ using namespace std;
 int WIDTH= 500, HEIGHT= 500;
 
 // Viewing frustum parameters
-GLdouble xRight=10, xLeft=-xRight, yTop=10, yBot=-yTop, N=1, F=1000;
+GLdouble xRight=100, xLeft=-xRight, yTop=100, yBot=-yTop, N=1, F=1000;
 
 // Camera parameters
 GLdouble eyeX=100.0, eyeY=100.0, eyeZ=100.0;
@@ -27,7 +27,18 @@ GLdouble upX=0, upY=1, upZ=0;
 //Satelite
 Satelite* miSatelite;
 
+//Esfera
 GLUquadricObj* q;
+
+
+//Angulo movimiento satelite;
+int anguloSatelite=0;
+
+//Angulo planeta
+int anguloPlaneta=0;
+
+//X de la espiral
+double xEspiral=0;
 
 void initGL() {	 		 
 	glClearColor(0.6f,0.7f,0.8f,1.0);
@@ -49,9 +60,9 @@ void initGL() {
 	glShadeModel(GL_SMOOTH);
 
 	// buildSceneObjects();
-	miSatelite= new Satelite(5,200,20);
+	miSatelite= new Satelite(5,10,2);
 	q=gluNewQuadric();
-	gluQuadricDrawStyle(q, GLU_FILL);
+	gluQuadricDrawStyle(q, GLU_LINE);
 
 	// Camera set up
 	glMatrixMode(GL_MODELVIEW);
@@ -74,43 +85,37 @@ void display(void) {
 	glBegin( GL_LINES );
 		glColor3f(1.0,0.0,0.0); 
 		glVertex3f(0, 0, 0);
-		glVertex3f(20, 0, 0);	     
+		glVertex3f(200, 0, 0);	     
 	 
 		glColor3f(0.0,1.0,0.0); 
 		glVertex3f(0, 0, 0);
-		glVertex3f(0, 20, 0);	 
+		glVertex3f(0, 200, 0);	 
 	 
 		glColor3f(0.0,0.0,1.0); 
 		glVertex3f(0, 0, 0);
-		glVertex3f(0, 0, 20);	     
+		glVertex3f(0, 0, 200);	     
 	glEnd();
 
-	//miSatelite->dibuja();
-	gluSphere(q,5,20,20);
-	/*glBegin(GL_LINE_LOOP);		
-		//Dibujamos el cuadrado base del satelite.
-		glColor3f(0.0,0.0,0.0); 
-		glVertex3f(miSatelite->sat->vertice[0]->x,miSatelite->sat->vertice[0]->y,miSatelite->sat->vertice[0]->z);
-		glVertex3f(miSatelite->sat->vertice[1]->x,miSatelite->sat->vertice[1]->y,miSatelite->sat->vertice[1]->z);
-		glVertex3f(miSatelite->sat->vertice[1]->x,miSatelite->sat->vertice[1]->y,miSatelite->sat->vertice[1]->z);
-		glVertex3f(miSatelite->sat->vertice[2]->x,miSatelite->sat->vertice[2]->y,miSatelite->sat->vertice[2]->z);
-		glVertex3f(miSatelite->sat->vertice[2]->x,miSatelite->sat->vertice[2]->y,miSatelite->sat->vertice[2]->z);
-		glVertex3f(miSatelite->sat->vertice[3]->x,miSatelite->sat->vertice[3]->y,miSatelite->sat->vertice[3]->z);
-		glVertex3f(miSatelite->sat->vertice[0]->x,miSatelite->sat->vertice[0]->y,miSatelite->sat->vertice[0]->z);
-		glVertex3f(miSatelite->sat->vertice[3]->x,miSatelite->sat->vertice[3]->y,miSatelite->sat->vertice[3]->z);
 
-		//Dibujamos el cuadrado superior
-		glColor3f(1.0,0.0,0.0); 
-		glVertex3f(miSatelite->sat->vertice[4]->x,miSatelite->sat->vertice[4]->y,miSatelite->sat->vertice[4]->z);
-		glVertex3f(miSatelite->sat->vertice[5]->x,miSatelite->sat->vertice[5]->y,miSatelite->sat->vertice[5]->z);
-		glVertex3f(miSatelite->sat->vertice[5]->x,miSatelite->sat->vertice[5]->y,miSatelite->sat->vertice[5]->z);
-		glVertex3f(miSatelite->sat->vertice[6]->x,miSatelite->sat->vertice[6]->y,miSatelite->sat->vertice[6]->z);
-		glVertex3f(miSatelite->sat->vertice[6]->x,miSatelite->sat->vertice[6]->y,miSatelite->sat->vertice[6]->z);
-		glVertex3f(miSatelite->sat->vertice[7]->x,miSatelite->sat->vertice[7]->y,miSatelite->sat->vertice[7]->z);
-		glVertex3f(miSatelite->sat->vertice[4]->x,miSatelite->sat->vertice[4]->y,miSatelite->sat->vertice[4]->z);
-		glVertex3f(miSatelite->sat->vertice[7]->x,miSatelite->sat->vertice[7]->y,miSatelite->sat->vertice[7]->z);
+	glMatrixMode(GL_MODELVIEW);
+	glPushMatrix();
+	//glRotatef(anguloPlaneta,0.0,-1.0,0.0);
+	glTranslatef(cos(xEspiral)+xEspiral*sin(xEspiral),0,sin(xEspiral)-xEspiral*cos(xEspiral));
+	glRotatef(anguloPlaneta,0.0,-1.0,0.0);
+	glColor3f(0.0,0.0,0.0);
+	gluSphere(q,20,20,20);
+	glPushMatrix();
+	glRotatef(anguloSatelite,0,1,0);
+	glTranslatef(40,0,0);
+	glRotatef(100,0,0,1);
+	glColor3f(1.0,1.0,0.0);	
+	miSatelite->dibuja();
+	glPopMatrix();
+	glPopMatrix();
 	
-	glEnd();*/
+
+	
+	
 
 	glFlush();
 	glutSwapBuffers();
@@ -151,7 +156,25 @@ void key(unsigned char key, int x, int y){
 			//continue_in_main_loop = false; // (**)
 			//Freeglut's sentence for stopping glut's main loop (*)
 			glutLeaveMainLoop (); 
-			break;		 			 
+			break;	
+		case 'a':
+			anguloSatelite=(anguloSatelite+2)%360;
+			anguloPlaneta=(anguloPlaneta+1)%360;
+			xEspiral=xEspiral+0.1;
+			display();
+			break;
+		case 's':
+			anguloSatelite=(anguloSatelite+2)%360;
+			display();
+			break;
+		case 'd':
+			anguloPlaneta=(anguloPlaneta+1)%360;
+			display();
+			break;
+		case 'f':
+			xEspiral=xEspiral+0.1;
+			display();
+			break;
 		default:
 			need_redisplay = false;
 			break;
