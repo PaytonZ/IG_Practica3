@@ -18,13 +18,7 @@
 class Malla
 {
 protected: 
-	/*int numVertices;
-	PV3D** vertice;
-	int numNormales;
-	PV3D** normal;
-	int numCaras;
-	Cara** cara;
-	int iVertice,iNormal,iCara;*/
+	
 public:
 	//De momento esto esta publico para poder debugear y ver el valorde desde clases externas.
 	int numVertices;
@@ -46,7 +40,20 @@ public:
 		iNormal=0;
 		iCara=0;
 	}
-	~Malla(void);
+	~Malla(void)
+	{
+		for(int i=0; i<numVertices; i++)
+		{
+			delete []vertice[i];
+		}
+		for(int i=0; i<numNormales; i++)
+		{
+			delete []normal[i];
+		}
+	
+			delete []cara;
+	}
+
 
 	void dibuja();
 	PV3D* calculoVectorNormalPorNewell(Cara c);

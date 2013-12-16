@@ -167,7 +167,9 @@ public:
 
 	}
 
-	~Satelite(void){}
+	~Satelite(void){
+		delete sat;
+	}
 
 	void dibuja();
 
