@@ -6,9 +6,10 @@
 *																				*
 *********************************************************************************/
 
+#pragma once
 
 /*
-	Esta clase tiene que tener una tabla de vetices otra de normales y otra de caras.
+Esta clase tiene que tener una tabla de vetices otra de normales y otra de caras.
 */
 
 
@@ -18,7 +19,7 @@
 class Malla
 {
 protected: 
-	
+
 public:
 	//De momento esto esta publico para poder debugear y ver el valorde desde clases externas.
 	int numVertices;
@@ -43,15 +44,14 @@ public:
 	~Malla(void)
 	{
 		for(int i=0; i<numVertices; i++)
-		{
+
 			delete []vertice[i];
-		}
+
 		for(int i=0; i<numNormales; i++)
-		{
 			delete []normal[i];
-		}
-	
-			delete []cara;
+
+		for(int i=0; i<numCaras; i++)
+			delete []cara[i];
 	}
 
 

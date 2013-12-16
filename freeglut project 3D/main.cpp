@@ -7,6 +7,8 @@
 
 #include <iostream>
 #include "Satelite.h"
+#include "CirculoEspiral.h"
+
 using namespace std;
 
 // Freeglut parameters
@@ -30,6 +32,7 @@ Satelite* miSatelite;
 //Esfera
 GLUquadricObj* q;
 
+CirculoEspiral* esp;
 
 //Angulo movimiento satelite;
 int anguloSatelite=0;
@@ -64,6 +67,8 @@ void initGL() {
 	q=gluNewQuadric();
 	gluQuadricDrawStyle(q, GLU_LINE);
 
+	esp = new CirculoEspiral(10,4,2);
+
 	// Camera set up
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
@@ -96,7 +101,7 @@ void display(void) {
 		glVertex3f(0, 0, 200);	     
 	glEnd();
 
-
+	/*
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
 	//glRotatef(anguloPlaneta,0.0,-1.0,0.0);
@@ -112,7 +117,9 @@ void display(void) {
 	miSatelite->dibuja();
 	glPopMatrix();
 	glPopMatrix();
-	
+	*/
+
+	esp->pintar();
 
 	
 	

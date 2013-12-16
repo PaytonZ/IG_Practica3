@@ -39,6 +39,9 @@
     <ClCompile Include="Planeta.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CirculoEspiral.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cara.h">
@@ -60,6 +63,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Planeta.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CirculoEspiral.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

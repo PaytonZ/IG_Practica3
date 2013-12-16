@@ -59,6 +59,16 @@ PV3D& PV3D:: operator * (const GLdouble &p)
 		return *(new PV3D ( this->x*p ,  this->y*p,
 						this->z*p, false));
 }
+PV3D& PV3D::operator * (const PV3D &p)
+{
+	if(this->vector==0)
+	
+		return *(new PV3D ( this->x* p.x ,  this->y*p.y,
+						this->z*p.z, true));
+	else
+		return *(new PV3D ( this->x* p.x ,  this->y*p.y,
+						this->z*p.z, false));
+}
 
 
 GLdouble PV3D:: distanciaEntrePuntos(const PV3D &punto)
