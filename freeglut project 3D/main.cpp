@@ -19,7 +19,7 @@ using namespace std;
 int WIDTH= 500, HEIGHT= 500;
 
 // Viewing frustum parameters
-GLdouble xRight=100, xLeft=-xRight, yTop=100, yBot=-yTop, N=1, F=1000;
+GLdouble xRight=10, xLeft=-xRight, yTop=10, yBot=-yTop, N=1, F=1000;
 
 // Camera parameters
 GLdouble eyeX=100.0, eyeY=100.0, eyeZ=100.0;
@@ -35,13 +35,13 @@ GLUquadricObj* q;
 CirculoEspiral* esp;
 
 //Angulo movimiento satelite;
-int anguloSatelite=0;
+GLfloat anguloSatelite=0;
 
 //Angulo planeta
-int anguloPlaneta=0;
+GLfloat anguloPlaneta=0;
 
 //X de la espiral
-double xEspiral=0;
+GLfloat xEspiral=0;
 
 void initGL() {	 		 
 	glClearColor(0.6f,0.7f,0.8f,1.0);
@@ -63,11 +63,11 @@ void initGL() {
 	glShadeModel(GL_SMOOTH);
 
 	// buildSceneObjects();
-	//miSatelite= new Satelite(5,10,2);
-	//q=gluNewQuadric();
-	//gluQuadricDrawStyle(q, GLU_LINE);
+	miSatelite= new Satelite(0.5,10,2);
+	q=gluNewQuadric();
+	gluQuadricDrawStyle(q, GLU_LINE);
 
-	esp = new CirculoEspiral(20,5,10);
+	esp = new CirculoEspiral(1,30,40);
 
 	// Camera set up
 	glMatrixMode(GL_MODELVIEW);
@@ -102,21 +102,22 @@ void display(void) {
 	glEnd();
 
 	
-	/*glMatrixMode(GL_MODELVIEW);
+	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
 	glTranslatef(cos(xEspiral)+xEspiral*sin(xEspiral),0,sin(xEspiral)-xEspiral*cos(xEspiral));
 	glRotatef(anguloPlaneta,0.0,-1.0,0.0);
 	glColor3f(0.0,0.0,0.0);
-	gluSphere(q,20,20,20);
+	gluSphere(q,1,20,20);
 	glPushMatrix();
 	glRotatef(anguloSatelite,0,1,0);
-	glTranslatef(40,0,0);
+	glTranslatef(3,0,0);
 	glRotatef(100,0,0,1);
 	glColor3f(1.0,1.0,0.0);	
 	miSatelite->dibuja();
 	glPopMatrix();
-	glPopMatrix();*/
+	glPopMatrix();
 
+	glColor3f(1.0,0.0,0.0);
 	esp->pintar();
 	
 	/*glBegin(GL_LINES);
@@ -186,23 +187,31 @@ void key(unsigned char key, int x, int y){
 			glutLeaveMainLoop (); 
 			break;	
 		case 'a':
-			anguloSatelite=(anguloSatelite+2)%360;
-			anguloPlaneta=(anguloPlaneta+1)%360;
-			xEspiral=xEspiral+0.1;
+			anguloSatelite=((int)anguloSatelite+2)%360;
+			anguloPlaneta=((int)anguloPlaneta+1)%360;
+			xEspiral=xEspiral+0.01;
 			display();
 			break;
 		case 's':
-			anguloSatelite=(anguloSatelite+2)%360;
+			anguloSatelite=((int)anguloSatelite+2)%360;
 			display();
 			break;
 		case 'd':
-			anguloPlaneta=(anguloPlaneta+1)%360;
+			anguloPlaneta=((int)anguloPlaneta+1)%360;
 			display();
 			break;
 		case 'f':
-			xEspiral=xEspiral+0.1;
+			xEspiral=xEspiral+0.01;
 			display();
 			break;
+		case 'q':
+			
+				anguloSatelite=((int)anguloSatelite-2)%360;
+				anguloPlaneta=((int)anguloPlaneta-1)%360;
+				xEspiral=xEspiral-0.01;
+				display();
+				break;
+			
 		default:
 			need_redisplay = false;
 			break;

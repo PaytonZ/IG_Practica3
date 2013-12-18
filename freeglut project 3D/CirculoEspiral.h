@@ -34,7 +34,7 @@ public:
 		l.forward(radio,false);
 		espiral->anadirVertice(new PV3D (l.pos.x,l.pos.z,0,false));
 		l.dir=180-beta;
-		for (int i=1; i< numL; i++)
+		for (int h=1; h< numL; h++)
 		{
 			l.forward(lado,false);
 			l.turnTo(alfa);
@@ -55,11 +55,11 @@ public:
 		t(t)
 		*/
 
-		double tiempo = 20;
-		for(int i=0; i < numQ ; i++)
+		double tiempo = 0.5;
+		for(int i=0; i < numQ-1 ; i++)
 		{
 			//Transformar los puntos
-			for(int j=0; j <numL; j++)
+			for(int w=0; w<numL; w++)
 			{
 				PV3D c (cos(tiempo) + tiempo*sin(tiempo), 0 , sin(tiempo) - tiempo*cos(tiempo),false);
 				PV3D cprimera(tiempo*cos(tiempo) ,0 , tiempo*sin(tiempo),true );
@@ -68,14 +68,14 @@ public:
 				b=b.normalizarVector();
 				PV3D t= cprimera.normalizarVector();
 				PV3D n = b * t;		
-				PV3D* punto = espiral->vertice[j];	
+				PV3D* punto = espiral->vertice[w];	
 				double ax=n.x * punto->x +  b.x * punto->y + t.x * punto->z + c.x;
 				double ay=n.y * punto->x +  b.y * punto->y + t.y * punto->z + c.y;
 				double az=n.z * punto->x +  b.z * punto->y + t.z * punto->z + c.z;
 				espiral->anadirVertice(new PV3D(n.x * punto->x +  b.x * punto->y + t.x * punto->z + c.x ,n.y * punto->x +  b.y * punto->y + t.y * punto->z + c.y ,n.z * punto->x +  b.z * punto->y + t.z * punto->z + c.z ,	false));
 			}
 			//Inicializo las caras
-			for(int j=0; j < numL ; j++)
+			for(int j=numL*(i); j <numL*(i+1); j++)
 			{
 				Cara* caraAnadir= new Cara(4); //metemos un 4 por que las caras son rectangulos.
 				int debug=j;
@@ -86,18 +86,18 @@ public:
 				debugPuntos= espiral->vertice[debug];
 				caraAnadir->setValor(1,debug,j);
 
-				debug=((j+1)%numL)+numL;
+				debug=((j+1)%numL)+numL*(i+1);
 				debugPuntos=espiral->vertice[debug];
 				caraAnadir->setValor(2,debug,j); 
 
-				debug=(j+1)%numL;
+				debug=((j+1)%numL)+numL*i;
 				debugPuntos= espiral->vertice[debug];
 				caraAnadir->setValor(3,debug,j);   
 
 				espiral->anadirNormal (espiral->calculoVectorNormalPorNewell(*caraAnadir)); // Esto calcula la normal de la cara y la inserta en su posicion correspondiente en la maya.
 				espiral->anadirCara(caraAnadir); 
 			}
-			tiempo=tiempo+20;
+			tiempo=tiempo+0.5;
 		}
 	}
 

@@ -11,33 +11,21 @@
 
 void Malla :: dibuja()
 {
-	int i=0;
-	while (i<numCaras)
-	//for (int i=0;i<numCaras; i++)
+	
+	for (int i=0;i<numCaras; i++)
 	{
 		glLineWidth(1.0);
 		//glBegin(GL_POLYGON); 
 		glBegin(GL_LINE_LOOP);
-		int j=0;
-		//while (j<=cara[i]->getNumeroVertices())
-		while (j<4)
-		{
-			int iN=cara[i]->getIndiceNormalK(j);
-			int iV=cara[i]->getIndiceVerticeK(j);
-			PV3D* debug= vertice[iV];
-			glNormal3f((float)normal[iN]->x,(float)normal[iN]->y,(float)normal[iN]->z);			
-			glVertex3f((float)vertice[iV]->x,(float)vertice[iV]->y,(float)vertice[iV]->z);
-			j++;
-		}
-		/*for (int j=0; j<=cara[i]->getNumeroVertices();j++)
+		for (int j=0; j<cara[i]->getNumeroVertices();j++)
 		{
 			int iN=cara[i]->getIndiceNormalK(j);
 			int iV=cara[i]->getIndiceVerticeK(j);
 			glNormal3f(normal[iN]->x,normal[iN]->y,normal[iN]->z);
 			glVertex3f(vertice[iV]->x,vertice[iV]->y, vertice[iV]->z); 
-		}*/
+		}
 		glEnd();
-		i++;
+		
 	}
 }
 

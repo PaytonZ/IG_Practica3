@@ -18,7 +18,7 @@ public:
 	//Radio = radio con el que aproximamos la circunferencia.
 	//numL = numero de lados que queremos para aproximar la circunferencia.
 	//numQ = numero de caras que formara el "cono" que tiene el satelite.
-	Satelite(int radio, int numL, int numQ)
+	Satelite(double radio, int numL, int numQ)
 	{
 		nl=numL;
 		nq=numQ;
@@ -43,7 +43,7 @@ public:
 			sat->anadirVertice(new PV3D (l.pos.x,l.pos.y,l.pos.z,false));
 		}
 		//Calculo de la cara superior e insertamos los vertices en la malla.
-		Lapiz l2 (PV3D (0,5,0,false),0.0);
+		Lapiz l2 (PV3D (0,0.5,0,false),0.0);
 		l2.forward(radio,false);
 		sat->anadirVertice(new PV3D (l2.pos.x,l2.pos.y,l2.pos.z,false));
 		l2.dir=180-beta;
@@ -80,7 +80,7 @@ public:
 		}
 
 		//Aqui empezamos con la parte de la maya que hace un cono que hace un "Cono"
-		Lapiz l3 (PV3D (0,7,0,false),0.0);
+		Lapiz l3 (PV3D (0,0.7,0,false),0.0);
 		l3.forward(radio/5,false);
 		sat->anadirVertice(new PV3D (l3.pos.x,l3.pos.y,l3.pos.z,false));
 		l3.dir=180-beta;
@@ -117,14 +117,14 @@ public:
 
 		//Calculo de la antena del satelite.
 		double trozosRadio=(double)radio/numQ;
-		double crecer= 5.00/numQ; // 5 es el tamaño de la antena (Por ejemplo) pues cada fraccion crecera 5 dividido numero de fracciones.
+		double crecer= 0.9/numQ; // 5 es el tamaño de la antena (Por ejemplo) pues cada fraccion crecera 5 dividido numero de fracciones.
 		double acumulacionRadio= trozosRadio;
 		double acumulacionCrecer=crecer;
 
 		for (int k=0 ; k<numQ; k++)
 		{
 			lado= 2*acumulacionRadio*cos(M_PI*beta/180.00); //Calculo del nuevo lado de cara.
-			Lapiz l4 (PV3D (0,7+acumulacionCrecer,0,false),0.0);
+			Lapiz l4 (PV3D (0,0.7+acumulacionCrecer,0,false),0.0);
 			l4.forward(acumulacionRadio,false);
 			sat->anadirVertice(new PV3D (l4.pos.x,l4.pos.y,l4.pos.z,false));
 			l4.dir=180-beta;
