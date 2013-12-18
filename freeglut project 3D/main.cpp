@@ -106,46 +106,20 @@ void display(void) {
 	glPushMatrix();
 	glTranslatef(cos(xEspiral)+xEspiral*sin(xEspiral),0,sin(xEspiral)-xEspiral*cos(xEspiral));
 	glRotatef(anguloPlaneta,0.0,-1.0,0.0);
-	glColor3f(0.0,0.0,0.0);
+	glColor3f(1.0,0.0,1.0);
 	gluSphere(q,1,20,20);
 	glPushMatrix();
 	glRotatef(anguloSatelite,0,1,0);
 	glTranslatef(3,0,0);
 	glRotatef(100,0,0,1);
-	glColor3f(1.0,1.0,0.0);	
+	glColor3f(0.0,0.0,1.0);	
 	miSatelite->dibuja();
 	glPopMatrix();
 	glPopMatrix();
 
-	glColor3f(1.0,0.0,0.0);
+	glColor3f(1.0,1.0,0.0);
 	esp->pintar();
 	
-	/*glBegin(GL_LINES);
-	for(int i=0; i<45; i=i+5)
-			
-		{
-			glVertex3d(esp->espiral->vertice[i]->x,esp->espiral->vertice[i]->y,esp->espiral->vertice[i]->z);
-			glVertex3d(esp->espiral->vertice[i+1]->x,esp->espiral->vertice[i+1]->y,esp->espiral->vertice[i+1]->z);
-
-			glVertex3d(esp->espiral->vertice[i+1]->x,esp->espiral->vertice[i+1]->y,esp->espiral->vertice[i+1]->z);
-			glVertex3d(esp->espiral->vertice[i+2]->x,esp->espiral->vertice[i+2]->y,esp->espiral->vertice[i+2]->z);
-
-			glVertex3d(esp->espiral->vertice[i+2]->x,esp->espiral->vertice[i+2]->y,esp->espiral->vertice[i+2]->z);
-			glVertex3d(esp->espiral->vertice[i+3]->x,esp->espiral->vertice[i+3]->y,esp->espiral->vertice[i+3]->z);
-
-			glVertex3d(esp->espiral->vertice[i+3]->x,esp->espiral->vertice[i+3]->y,esp->espiral->vertice[i+3]->z);
-			glVertex3d(esp->espiral->vertice[i+4]->x,esp->espiral->vertice[i+4]->y,esp->espiral->vertice[i+4]->z);
-
-			glVertex3d(esp->espiral->vertice[i+4]->x,esp->espiral->vertice[i+4]->y,esp->espiral->vertice[i+4]->z);
-			glVertex3d(esp->espiral->vertice[i]->x,esp->espiral->vertice[i]->y,esp->espiral->vertice[i]->z);
-	}
-	
-
-	
-	glEnd();*/
-	
-	
-
 	glFlush();
 	glutSwapBuffers();
 }
@@ -189,7 +163,7 @@ void key(unsigned char key, int x, int y){
 		case 'a':
 			anguloSatelite=((int)anguloSatelite+2)%360;
 			anguloPlaneta=((int)anguloPlaneta+1)%360;
-			xEspiral=xEspiral+0.01;
+			xEspiral=xEspiral+0.05;
 			display();
 			break;
 		case 's':
@@ -208,7 +182,7 @@ void key(unsigned char key, int x, int y){
 			
 				anguloSatelite=((int)anguloSatelite-2)%360;
 				anguloPlaneta=((int)anguloPlaneta-1)%360;
-				xEspiral=xEspiral-0.01;
+				xEspiral=xEspiral-0.05;
 				display();
 				break;
 			
