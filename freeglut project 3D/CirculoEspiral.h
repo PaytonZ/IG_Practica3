@@ -32,18 +32,19 @@ public:
 		GLdouble lado= 2*radio*cos(M_PI*beta/180.00);
 		Lapiz l (centro,0.0);
 		l.forward(radio,false);
-		espiral->anadirVertice(new PV3D (l.pos.x,l.pos.y,l.pos.z,false));
+		espiral->anadirVertice(new PV3D (l.pos.x,l.pos.z,0,false));
 		l.dir=180-beta;
 		for (int i=1; i< numL; i++)
 		{
 			l.forward(lado,false);
 			l.turnTo(alfa);
-			espiral->anadirVertice(new PV3D (l.pos.x,l.pos.y,l.pos.z,false));
+			espiral->anadirVertice(new PV3D (l.pos.x,l.pos.z,0,false));
 		}
 		/* f -------------------> f' ----------> f''
 		x(t) = cos(t) + t*sen(t)  --> t cos(t) --> cos(t) - t * sin(t)
 		y(t) = 0 ----------------------> 0 ---------> 0 
-		z(t) = sen(t) – t*cos(t)  --> t sin(t) -> sen`(t)  + t *cos(t)		*/
+		z(t) = sen(t) – t*cos(t)  --> t sin(t) -> sen`(t)  + t *cos(t)
+		*/
 
 		/*
 		0     1       2    3
@@ -54,7 +55,7 @@ public:
 		t(t)
 		*/
 
-		double tiempo = 0.2;
+		double tiempo = 20;
 		for(int i=0; i < numQ ; i++)
 		{
 			//Transformar los puntos
@@ -96,7 +97,7 @@ public:
 				espiral->anadirNormal (espiral->calculoVectorNormalPorNewell(*caraAnadir)); // Esto calcula la normal de la cara y la inserta en su posicion correspondiente en la maya.
 				espiral->anadirCara(caraAnadir); 
 			}
-			tiempo=tiempo+0.2;
+			tiempo=tiempo+20;
 		}
 	}
 
