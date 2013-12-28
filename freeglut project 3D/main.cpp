@@ -43,6 +43,9 @@ GLfloat anguloPlaneta=0;
 //X de la espiral
 GLfloat xEspiral=0;
 
+//Angulo aspas
+GLfloat anguloAspas=0;
+
 void initGL() {	 		 
 	glClearColor(0.6f,0.7f,0.8f,1.0);
     glEnable(GL_LIGHTING);    
@@ -114,6 +117,8 @@ void display(void) {
 	glRotatef(100,0,0,1);
 	glColor3f(0.0,0.0,1.0);	
 	miSatelite->dibuja();
+	glRotatef(anguloAspas,0,1,0);
+	miSatelite->dibujaAspas();
 	glPopMatrix();
 	glPopMatrix();
 
@@ -163,6 +168,7 @@ void key(unsigned char key, int x, int y){
 		case 'a':
 			anguloSatelite=((int)anguloSatelite+2)%360;
 			anguloPlaneta=((int)anguloPlaneta+1)%360;
+			anguloAspas=((int)anguloAspas+2)%360;
 			xEspiral=xEspiral+0.05;
 			display();
 			break;
@@ -178,10 +184,15 @@ void key(unsigned char key, int x, int y){
 			xEspiral=xEspiral+0.01;
 			display();
 			break;
+		case 'g':
+			anguloAspas=((int)anguloAspas+2)%360;
+			display();
+			break;
 		case 'q':
 			
 				anguloSatelite=((int)anguloSatelite-2)%360;
 				anguloPlaneta=((int)anguloPlaneta-1)%360;
+				anguloAspas=((int)anguloAspas-2)%360;
 				xEspiral=xEspiral-0.05;
 				display();
 				break;
