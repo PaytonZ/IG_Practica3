@@ -72,7 +72,6 @@
     <ClCompile Include="Lapiz.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Malla.cpp" />
-    <ClCompile Include="Planeta.cpp" />
     <ClCompile Include="PV3D.cpp" />
     <ClCompile Include="Satelite.cpp" />
     <ClCompile Include="VerticeNormal.cpp" />
@@ -82,7 +81,6 @@
     <ClInclude Include="CirculoEspiral.h" />
     <ClInclude Include="Lapiz.h" />
     <ClInclude Include="Malla.h" />
-    <ClInclude Include="Planeta.h" />
     <ClInclude Include="PV3D.h" />
     <ClInclude Include="Satelite.h" />
     <ClInclude Include="VerticeNormal.h" />

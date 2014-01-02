@@ -1,6 +1,6 @@
 /********************************************************************************
 *																				*
-*		Practica 1 IG - Planeta y satelite										*
+*		Practica 3 IG - Planeta y satelite										*
 *		Autores:	David Garcia Alvarez										*
 *					Juan Luis Perez Valbuena									*
 *																				*
@@ -21,7 +21,6 @@ class Malla
 protected: 
 
 public:
-	//De momento esto esta publico para poder debugear y ver el valorde desde clases externas.
 	int numVertices;
 	PV3D** vertice;
 	int numNormales;

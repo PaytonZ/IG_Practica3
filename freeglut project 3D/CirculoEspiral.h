@@ -1,4 +1,12 @@
-#pragma once
+/********************************************************************************
+*																				*
+*		Practica 3 IG - Planeta y satelite										*
+*		Autores:	David Garcia Alvarez										*
+*					Juan Luis Perez Valbuena									*
+*																				*
+*********************************************************************************/
+
+
 #include "Malla.h"
 #include "Lapiz.h"
 #include <cmath>
@@ -55,7 +63,7 @@ public:
 		t(t)
 		*/
 
-		double tiempo = 0.5;
+		double tiempo = 0.2;
 		for(int i=0; i < numQ-1 ; i++)
 		{
 			//Transformar los puntos
@@ -97,7 +105,7 @@ public:
 				espiral->anadirNormal (espiral->calculoVectorNormalPorNewell(*caraAnadir)); // Esto calcula la normal de la cara y la inserta en su posicion correspondiente en la maya.
 				espiral->anadirCara(caraAnadir); 
 			}
-			tiempo=tiempo+0.5;
+			tiempo=tiempo+0.2;
 		}
 	}
 

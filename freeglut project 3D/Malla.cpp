@@ -1,6 +1,6 @@
 /********************************************************************************
 *																				*
-*		Practica 1 IG - Planeta y satelite										*
+*		Practica 3 IG - Planeta y satelite										*
 *		Autores:	David Garcia Alvarez										*
 *					Juan Luis Perez Valbuena									*
 *																				*
@@ -37,11 +37,10 @@ PV3D* Malla :: calculoVectorNormalPorNewell(Cara c)
 	for (int i=0; i<c.getNumeroVertices();i++)
 	{
 		verticeActual=vertice[c.getIndiceVerticeK(i)];
-		int asd=c.getIndiceVerticeK((i+1)%c.getNumeroVertices());
 		verticeSiguiente=vertice[c.getIndiceVerticeK((i+1)%c.getNumeroVertices())];
-		n->x+=(verticeActual->y-verticeSiguiente->y)*(verticeActual->z-verticeSiguiente->z);
-		n->y+=(verticeActual->z-verticeSiguiente->z)*(verticeActual->x-verticeSiguiente->x);
-		n->z+=(verticeActual->x-verticeSiguiente->x)*(verticeActual->y-verticeSiguiente->y);
+		n->x+=(verticeActual->y-verticeSiguiente->y)*(verticeActual->z+verticeSiguiente->z);
+		n->y+=(verticeActual->z-verticeSiguiente->z)*(verticeActual->x+verticeSiguiente->x);
+		n->z+=(verticeActual->x-verticeSiguiente->x)*(verticeActual->y+verticeSiguiente->y);
 	}
 	n->normalizarVector();
 	return n;

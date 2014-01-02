@@ -1,3 +1,11 @@
+/********************************************************************************
+*																				*
+*		Practica 3 IG - Planeta y satelite										*
+*		Autores:	David Garcia Alvarez										*
+*					Juan Luis Perez Valbuena									*
+*																				*
+*********************************************************************************/
+
 #include <Windows.h>
 #include <gl/GL.h>
 #include <gl/GLU.h>
@@ -70,7 +78,7 @@ void initGL() {
 	q=gluNewQuadric();
 	gluQuadricDrawStyle(q, GLU_LINE);
 
-	esp = new CirculoEspiral(1,30,40);
+	esp = new CirculoEspiral(1,30,100);
 
 	// Camera set up
 	glMatrixMode(GL_MODELVIEW);

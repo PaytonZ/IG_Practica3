@@ -1,6 +1,6 @@
 /********************************************************************************
 *																				*
-*		Practica 1 IG - Planeta y satelite										*
+*		Practica 3 IG - Planeta y satelite										*
 *		Autores:	David Garcia Alvarez										*
 *					Juan Luis Perez Valbuena									*
 *																				*
@@ -11,18 +11,7 @@
 #include <cmath>
 #include "PV3D.h"
 
-/*PV3D& PV3D::operator = (const PV3D &p)
-{
-	if(this!=&p){ 
-		this->x = p.x;
-		this->y = p.y;
-		this->z= p.z;
-		this->vector=p.vector;
-	}
-	return *this;
-}*/
 
-// TODO falta por implementar la multiplicacion.
 
 
 //No tiene sentido sumar 2 puntos
